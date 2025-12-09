@@ -1,0 +1,45 @@
+{% extends 'base.html' %}
+
+{% load crispy_forms_tags %}
+
+{% block content %}
+
+    {% for message in messages %}
+        
+             <div class ="card mt-2">
+            <div class="card-header"><strong>{{message.msg_sender}}</strong>
+
+
+
+
+            </div>
+            <div class="card-footer">
+                <div>
+                    {{message}}
+                </div>
+                    <br>
+
+            </div>
+            
+        </div>
+
+    {% endfor %}
+    <br>
+    <div class="fixed-center-wrapper">
+        <form method="POST" class="d-flex align-items-end w-100" style="gap: 10px;">
+            {% csrf_token %}
+            <textarea 
+                class="form-control" 
+                rows="3" 
+                placeholder="Your message..." 
+                name="msg-txt" 
+                style="flex-grow: 1;"
+            ></textarea>
+            
+            <button type="submit" class="btn btn-primary">Send</button>
+        </form>
+    </div>
+
+
+
+{% endblock %}

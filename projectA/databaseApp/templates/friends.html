@@ -1,0 +1,33 @@
+{% extends 'base.html' %}
+
+{% load crispy_forms_tags %}
+
+{% block content %}
+
+{% for friend in friends %}
+     <div class ="card mt-2">
+            <div class="card-header"><strong>{{friend}}</strong>
+
+
+
+
+                    <form method="POST">
+                        {% csrf_token %}
+                        <button type="submit" class="btn btn-danger" name="friend" value="{{friend.id}}">Remove</button>
+                    </form>
+
+            </div>
+            <div class="card-footer">
+                <div>
+                    <a href="{% url 'messages' friend.pk %}">Message</a>
+                </div>
+                    <br>
+
+            </div>
+            
+        </div>
+
+{% endfor %}
+
+
+{% endblock %}
