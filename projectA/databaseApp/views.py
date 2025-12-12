@@ -8,7 +8,7 @@ from django.contrib.auth.models import auth
 from django.contrib.auth import authenticate
 
 from django.contrib.auth.decorators import login_required
-from .models import Post, Comment,User, Message
+from .models import Post, Comment,User, Message, Profile
 from django.db.models import Q
 
 from django.shortcuts import get_object_or_404
@@ -51,7 +51,14 @@ def my_login(request):
 
                 auth.login(request, user)
 
-                return redirect("dashboard")
+                #check if user has profile
+                if hasattr(user, 'profile'):
+
+                    return redirect("dashboard")
+                else:
+                    Profile.objects.create(
+                    user=user,)
+                    return redirect("dashboard")
     context ={
         'form': form
     }
